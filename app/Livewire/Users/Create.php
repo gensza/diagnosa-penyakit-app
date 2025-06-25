@@ -26,8 +26,6 @@ class Create extends Component
             'password' => Hash::make($validated['password']),
         ]);
 
-        session()->flash('message', 'Post Created Successfully');
-
         $this->reset(); // bersihkan input
         $this->dispatch('post-added'); // trigger event jika ingin refresh data
         $this->dispatch('post-added-alert', message: "User successfully created!"); // trigger event jika ingin refresh data

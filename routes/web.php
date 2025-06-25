@@ -15,15 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'welcome');
 
-Route::view('/', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('/', 'dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', \App\Livewire\Dasboards\Index::class)->name('dashboard');
     Route::get('/users', \App\Livewire\Users\Index::class)->name('users');
+    Route::get('/gejala', \App\Livewire\Symptoms\Index::class)->name('gejala');
 });
 require __DIR__ . '/auth.php';

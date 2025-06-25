@@ -26,13 +26,3 @@
         <livewire:users.create />
     @endif
 </div>
-
-<script>
-    document.addEventListener('post-added-alert', event => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: event.detail.message,
-        });
-    });
-</script>

@@ -40,6 +40,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
     </script>
+    <script>
+        document.addEventListener('post-added-alert', event => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: event.detail.message,
+                confirmButtonText: 'OK', // Optional: customize button text
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // e.g., reload the page
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
