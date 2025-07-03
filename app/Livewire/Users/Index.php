@@ -9,6 +9,13 @@ class Index extends Component
 {
     public bool $showModal = false;
 
+    public function mount()
+    {
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Unauthorized');
+        }
+    }
+
     public function open_modal_add()
     {
         $this->showModal = true;

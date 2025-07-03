@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Symptom_role extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'kode_rule',
+        'kode_gejala',
+    ];
 }

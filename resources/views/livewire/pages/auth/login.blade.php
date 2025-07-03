@@ -20,7 +20,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         Session::regenerate();
 
-        $this->redirectIntended(default: RouteServiceProvider::HOME, navigate: true);
+        $this->redirect(auth()->user()->is_admin ? route('dashboard') : route('diagnosa'));
     }
 }; ?>
 

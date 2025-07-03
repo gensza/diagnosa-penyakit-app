@@ -34,15 +34,23 @@ new class extends Component {
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('gejala')" :active="request()->routeIs('gejala')" wire:navigate>
-                        {{ __('Gejala') }}
-                    </x-nav-link>
-                </div>
+                @if (auth()->user()->is_admin)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('gejala')" :active="request()->routeIs('gejala')" wire:navigate>
+                            {{ __('Gejala') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')" wire:navigate>
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                @endif
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')" wire:navigate>
-                        {{ __('Users') }}
+                    <x-nav-link :href="route('diagnosa')" :active="request()->routeIs('diagnosa')" wire:navigate>
+                        {{ __('Diagnosa') }}
                     </x-nav-link>
                 </div>
             </div>
