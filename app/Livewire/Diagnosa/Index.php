@@ -12,20 +12,26 @@ use Illuminate\Support\Facades\Auth;
 class Index extends Component
 {
     public $gejalaList = [];
+    public $rulesGejala = [];
     public $step = 0;
     public $jawaban = [];
     public $hasil = null;
     public $topTipes = null;
 
-    public $rulesGejala = [
-        'tipes_ringan' => ['GL005', 'GL006', 'GL007'],
-        'tipes_menengah' => ['GL001', 'GL002', 'GL003', 'GL004'],
-        'tipes_berat' => ['GL001', 'GL002', 'GL003', 'GL004', 'GL005', 'GL006', 'GL007'],
-    ];
-
     public function mount()
     {
         $this->gejalaList = Symptom::all()->toArray();
+
+        // gejala with where
+        $rulesGejalaRingan = Symptom::where('tipes_ringan', 'Yes')->pluck('kode_gejala')->toArray();
+        $rulesGejalaMenengah = Symptom::where('tipes_menengah', 'Yes')->pluck('kode_gejala')->toArray();
+        $rulesGejalaBerat = Symptom::where('tipes_berat', 'Yes')->pluck('kode_gejala')->toArray();
+
+        $this->rulesGejala = [
+            'tipes_ringan' => $rulesGejalaRingan,
+            'tipes_menengah' => $rulesGejalaMenengah,
+            'tipes_berat' => $rulesGejalaBerat,
+        ];
     }
 
     public function answer($jawab)
@@ -81,7 +87,7 @@ class Index extends Component
     {
         $yaJawaban = array_keys(array_filter($this->jawaban, fn($v) => $v === 'yes'));
 
-        $kodeRule = 'RC-' . now()->format('YmdH');
+        $kodeRule = 'RC-' . now()->format('YmdHis');
 
         foreach ($yaJawaban as $kode) {
             Symptom_role::create([

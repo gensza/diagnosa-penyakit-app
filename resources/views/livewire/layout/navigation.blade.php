@@ -23,7 +23,7 @@ new class extends Component {
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="{{ asset('logo/960px-UNPAM_logo1.png') }}" alt="Logo" style="height: 3.25rem">
                     </a>
                 </div>
 
@@ -51,6 +51,12 @@ new class extends Component {
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('diagnosa')" :active="request()->routeIs('diagnosa')" wire:navigate>
                         {{ __('Diagnosa') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('diagnosa_history')" :active="request()->routeIs('diagnosa_history')" wire:navigate>
+                        {{ __('Diagnosa History') }}
                     </x-nav-link>
                 </div>
             </div>

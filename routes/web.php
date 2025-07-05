@@ -28,5 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users', \App\Livewire\Users\Index::class)->name('users');
     Route::get('/gejala', \App\Livewire\Symptoms\Index::class)->name('gejala');
     Route::get('/diagnosa', \App\Livewire\Diagnosa\Index::class)->name('diagnosa');
+    Route::get('/diagnosa_history', \App\Livewire\Diagnosa\History::class)->name('diagnosa_history');
 });
 require __DIR__ . '/auth.php';
