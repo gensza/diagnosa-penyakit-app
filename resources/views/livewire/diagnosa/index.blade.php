@@ -4,22 +4,53 @@
             {{ __('Diagnosa') }}
         </h2>
     </x-slot>
-    <div class="py-12">
-        <div class="p-6 max-w-2xl mx-auto">
-            <div class="bg-white p-6 rounded shadow">
-                <h2 class="text-lg font-semibold mb-4">
-                    Pertanyaan {{ $step + 1 }} dari {{ count($gejalaList) }}
-                </h2>
-                <p class="mb-6">
-                    Apakah anda mengalami gejala <b>{{ $gejalaList[$step]['nama_penyakit'] }} ?</b>
-                </p>
-                <div class="flex gap-2">
-                    <button wire:click="answer('yes')" class="btn btn-success">Ya</button>
-                    <button wire:click="answer('no')" class="btn btn-danger">Tidak</button>
+    <div class="py-5">
+        <div class="container">
+            <div class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeIn">
+                <div class="card-body p-5">
+
+                    {{-- Gambar ilustrasi --}}
+                    <div class="text-center mb-4">
+                        <img src="{{ asset('images/undraw_developer-activity_4zqd.svg') }}" alt="Diagnosa"
+                            class="img-fluid mx-auto d-block" style="max-height: 150px;">
+                    </div>
+
+                    {{-- Progress bar --}}
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-semibold">Pertanyaan {{ $step + 1 }} dari
+                                {{ count($gejalaList) }}</span>
+                            <span>{{ round((($step + 1) / count($gejalaList)) * 100) }}%</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                                style="width: {{ (($step + 1) / count($gejalaList)) * 100 }}%;" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    {{-- Pertanyaan --}}
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold">Apakah Anda mengalami gejala:</h4>
+                        <p class="fs-5 text-primary fw-semibold mt-2">
+                            {{ $gejalaList[$step]['nama_penyakit'] }}?
+                        </p>
+                    </div>
+
+                    {{-- Tombol jawaban --}}
+                    <div class="d-flex justify-content-center gap-3">
+                        <button wire:click="answer('no')" class="btn btn-danger btn-lg px-5 shadow-sm">
+                            ❌ Tidak
+                        </button>
+                        <button wire:click="answer('yes')" class="btn btn-success btn-lg px-5 shadow-sm">
+                            ✅ Ya
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="modal fade" id="resultModal" style="background-color: rgba(0,0,0,0.5);">
         <div class="modal-dialog">

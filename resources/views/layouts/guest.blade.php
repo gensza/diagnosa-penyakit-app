@@ -20,7 +20,7 @@
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
             <a href="/" wire:navigate>
-                <img src="{{ asset('logo/960px-UNPAM_logo1.png') }}" alt="Logo" style="height: 7.25rem">
+                <img src="{{ asset('logo/logo_puskes.jpeg') }}" alt="Logo" style="height: 7.25rem">
             </a>
         </div>
 

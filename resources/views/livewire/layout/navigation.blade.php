@@ -23,7 +23,7 @@ new class extends Component {
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" wire:navigate>
-                        <img src="{{ asset('logo/960px-UNPAM_logo1.png') }}" alt="Logo" style="height: 3.25rem">
+                        <img src="{{ asset('logo/logo_puskes.jpeg') }}" alt="Logo" style="height: 3.25rem">
                     </a>
                 </div>
 

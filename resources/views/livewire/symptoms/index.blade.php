@@ -24,6 +24,7 @@
                                 <th>Tipes Ringan</th>
                                 <th>Tipes Menengah</th>
                                 <th>Tipes Berat</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,12 @@
                                     <td><input type="checkbox" class="form-check-input"
                                             {{ $post->tipes_berat == 'Yes' ? 'checked' : '' }}
                                             wire:click="updateStatusChecked('{{ $post->id }}', 'tipes_berat', '{{ $post->tipes_berat }}')">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger"
+                                            wire:click="confirmDelete({{ $post->id }})">
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             @empty
@@ -120,5 +127,20 @@
     window.addEventListener('hide-add-modal', () => {
         const modal = bootstrap.Modal.getInstance(document.getElementById('addModal'));
         modal.hide();
+    });
+
+    window.addEventListener('show-delete-confirmation', () => {
+        Swal.fire({
+            title: 'Delete this Gejala?',
+            text: "This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // ✅ this hits the `delete()` Livewire method
+                Livewire.find(@js($this->getId())).call('delete');
+            }
+        });
     });
 </script>

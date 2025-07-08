@@ -16,6 +16,7 @@ class Index extends Component
     public string $tipes_ringan = 'No';
     public string $tipes_menengah = 'No';
     public string $tipes_berat = 'No';
+    public $deleteId = null;
 
     public function render()
     {
@@ -55,6 +56,26 @@ class Index extends Component
         $this->reset(); // bersihkan input
         $this->dispatch('post-added-alert', message: "Gejala successfully created!"); // trigger event jika ingin refresh data
         $this->dispatch('modal-closed'); // tutup modal
+    }
+
+    public function modalResultClosed()
+    {
+        $this->dispatch('hide-result-modal');
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->deleteId = $id;
+        $this->dispatch('show-delete-confirmation');
+    }
+
+    public function delete()
+    {
+        $user = Symptom::findOrFail($this->deleteId);
+        $user->delete();
+
+        $this->reset('deleteId');
+        $this->dispatch('post-added-alert', message: "Gejala deleted successfully!");
     }
 
     public function updateStatusChecked($id, $field, $value)
