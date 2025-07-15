@@ -82,7 +82,9 @@ class Lists extends Component
     public function delete()
     {
         $user = User::findOrFail($this->deleteId);
-        $user->delete();
+        $user->update([
+            'is_active' => 0,
+        ]);
 
         $this->reset('deleteId');
         $this->dispatch('post-added-alert', message: "User deleted successfully!");
@@ -92,6 +94,7 @@ class Lists extends Component
     {
         $posts = User::query()
             ->where('name', 'like', '%' . $this->search . '%')
+            ->where('is_active', 1)
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
